@@ -27,13 +27,6 @@ const handler = async (validatedData: InputType): Promise<ReturnType> => {
       error: "Missing Fields. Cannot create board!",
     };
   }
-  console.log({
-    imageId,
-    imageThumbUrl,
-    imageFullUrl,
-    imageUserName,
-    imageLinkHTML,
-  });
   let board: Board;
   try {
     board = await db.board.create({

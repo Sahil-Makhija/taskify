@@ -7,9 +7,9 @@ type Action<TInput, TOutput> = (
 ) => Promise<ActionState<TInput, TOutput>>;
 
 interface UseActionProps<TOutput> {
-  onError: (error: string) => void;
-  onComplete: () => void;
-  onSuccess: (data: TOutput) => void;
+  onError?: (error: string) => void;
+  onComplete?: () => void;
+  onSuccess?: (data: TOutput) => void;
 }
 
 export const useAction = <TInput, TOutput>(

@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { startCase } from "lodash";
 import { notFound, redirect } from "next/navigation";
 import React from "react";
 import { BoardNavbar } from "./_components/BoardNavbar";
@@ -11,12 +10,7 @@ export const generateMetadata = async ({
   params: { boardId: string };
 }) => {
   const { orgId } = auth();
-
-  if (!orgId) {
-    return {
-      title: "Board",
-    };
-  }
+  if (!orgId) redirect("/select-org");
 
   const board = await db.board.findUnique({
     where: {
