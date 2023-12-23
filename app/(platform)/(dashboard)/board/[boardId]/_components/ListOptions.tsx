@@ -58,7 +58,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="h-auto w-auto p-2" variant="ghost">
+        <Button className="h-auto hover:bg-black/10 rounded-full w-auto p-2" variant="ghost">
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
@@ -82,8 +82,8 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
           Add card...
         </Button>
         <form action={onCopy}>
-          <input hidden name="id" id="id" value={data.id} />
-          <input hidden name="boardId" id="boardId" value={data.boardId} />
+          <input readOnly hidden name="id" id="id" value={data.id} />
+          <input readOnly hidden name="boardId" id="boardId" value={data.boardId} />
           <FormSubmit
             variant="ghost"
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
@@ -93,8 +93,8 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
         </form>
         <Separator />
         <form action={onDelete}>
-          <input hidden name="id" id="id" value={data.id} />
-          <input hidden name="boardId" id="boardId" value={data.boardId} />
+          <input readOnly hidden name="id" id="id" value={data.id} />
+          <input readOnly hidden name="boardId" id="boardId" value={data.boardId} />
           <FormSubmit
             variant="ghost"
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
