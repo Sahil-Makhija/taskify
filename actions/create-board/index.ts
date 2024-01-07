@@ -6,6 +6,8 @@ import { revalidatePath } from "next/cache";
 import { Board } from "@prisma/client";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { CreateBoard } from "./schema";
+import { manageOrgLimit } from "@/lib/org-limit";
+import { MAX_FREE_BOARDS } from "@/constants/boards";
 
 const handler = async (validatedData: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
@@ -13,6 +15,11 @@ const handler = async (validatedData: InputType): Promise<ReturnType> => {
     return {
       error: "Unauthorized",
     };
+
+  const canCreate = await manageOrgLimit("CAN_CREATE") as boolean;
+  if(!canCreate){
+    return {error:`Free users cannot create more than ${MAX_FREE_BOARDS} boards.`}
+  }
   const { title, image } = validatedData;
   const { imageId, imageThumbUrl, imageFullUrl, imageUserName, imageLinkHTML } =
     JSON.parse(image);
@@ -45,6 +52,7 @@ const handler = async (validatedData: InputType): Promise<ReturnType> => {
       error: "failed to create",
     };
   }
+  await manageOrgLimit("INCREMENT")
   revalidatePath(`/board/${board.id}`);
   return {
     data: board,

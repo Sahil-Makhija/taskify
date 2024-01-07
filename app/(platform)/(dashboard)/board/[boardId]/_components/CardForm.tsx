@@ -28,6 +28,7 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
       onError: (error) => {
         toast.error(error);
       },
+      onComplete:disableEditing
     });
     const params = useParams();
     const onSubmit = (formData: FormData) => {
