@@ -64,6 +64,7 @@ const handler = async (): Promise<ReturnType> => {
       url = stripeSession.url || "";
     }
   } catch (error) {
+    console.error(error);
     return { error: "Something went wrong! " };
   }
   revalidatePath(`/organization/${orgId}`);
