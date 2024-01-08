@@ -71,7 +71,7 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
               onKeyDown={onTextareakeyDown}
               ref={textareaRef}
               placeholder="Enter a title for this card..."
-              errors={{}}
+              errors={fieldErrors}
             />
             <div className="flex items-center gap-x-1">
               <FormSubmit>Add card</FormSubmit>

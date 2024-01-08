@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import React from "react";
 import { BoardNavbar } from "./_components/BoardNavbar";
 
+//generateMetadata is a Next.Js function used to Update Metadata in a template.
 export const generateMetadata = async ({
   params,
 }: {
