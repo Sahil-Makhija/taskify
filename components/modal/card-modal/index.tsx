@@ -10,10 +10,10 @@ import { Description } from "./description";
 import { Actions } from "./actions";
 
 export const CardModal = () => {
-  const { id, isOpen, onClose } = useCardModal((state) => state);
+  const { isOpen, onClose , id } = useCardModal((state) => state);
   const { data: cardData } = useQuery<CardWithList>({
     queryKey: ["card", id],
-    queryFn: () => fetcher(`/api/cards/${id}`),
+    queryFn: () => fetcher(`/api/cards/${id as string}`),
   });
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

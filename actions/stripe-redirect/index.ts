@@ -65,7 +65,7 @@ const handler = async (): Promise<ReturnType> => {
     }
   } catch (error) {
     console.error(error);
-    return { error: "Something went wrong! " };
+    return { error:  "Something went wrong! " };
   }
   revalidatePath(`/organization/${orgId}`);
   return { data: url };
