@@ -6,10 +6,8 @@ import { NextResponse } from "next/server";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 
 export default authMiddleware({
-  publicRoutes: ["/","/api/webhook"],
+  publicRoutes: ["/", "/api/webhook"],
   afterAuth(auth, req) {
-    // console.log({req});
-
     if (auth.userId && auth.isPublicRoute) {
       let path = "/";
       if (auth.orgId) {

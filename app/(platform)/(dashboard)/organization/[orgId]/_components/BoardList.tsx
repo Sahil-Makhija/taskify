@@ -8,10 +8,13 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { manageOrgLimit } from "@/lib/org-limit";
 import { MAX_FREE_BOARDS } from "@/constants/boards";
+import { checkSubscription } from "@/lib/subscription";
 
 export const BoardList = async () => {
   const { orgId } = auth();
   if (!orgId) return redirect("/select-org");
+
+  const isPro = await checkSubscription();
 
   const boards = await db.board.findMany({
     where: {
@@ -45,7 +48,7 @@ export const BoardList = async () => {
             className="aspect-video relative h-full w-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition"
           >
             <p className="text-sm font-semibold">Create new board</p>
-            <span className="text-xs">{MAX_FREE_BOARDS - availableCount} remaining.</span>
+            <span className="text-xs">{isPro ? "Unlimited" :<>{MAX_FREE_BOARDS - availableCount} remaining.</>}</span>
             <Hint
               side="bottom"
               sideOffset={45}
