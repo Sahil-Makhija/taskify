@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { DeleteBoard } from "./schema";
-import {manageOrgLimit} from '@/lib/org-limit'
+import { manageOrgLimit } from "@/lib/org-limit";
 const handler = async (validatedData: InputType): Promise<ReturnType> => {
   const { orgId, userId } = auth();
   if (!userId || !orgId) {
@@ -18,7 +18,7 @@ const handler = async (validatedData: InputType): Promise<ReturnType> => {
   const { id } = validatedData;
   let board;
   try {
-    board = await db.board.delete({
+    await db.board.delete({
       where: {
         id,
       },
@@ -28,9 +28,9 @@ const handler = async (validatedData: InputType): Promise<ReturnType> => {
       error: "Failed to delete.",
     };
   }
-  await manageOrgLimit("DECREMENT")
+  await manageOrgLimit("DECREMENT");
   revalidatePath(`/organization/${orgId}`);
   redirect(`/organization/${orgId}`);
 };
 
-export const deleteBoard = createSafeAction(DeleteBoard,handler);
+export const deleteBoard = createSafeAction(DeleteBoard, handler);

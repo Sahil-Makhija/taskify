@@ -10,7 +10,7 @@ import { Description } from "./description";
 import { Actions } from "./actions";
 
 export const CardModal = () => {
-  const { isOpen, onClose , id } = useCardModal((state) => state);
+  const { isOpen, onClose, id } = useCardModal();
   const { data: cardData } = useQuery<CardWithList>({
     queryKey: ["card", id],
     queryFn: () => fetcher(`/api/cards/${id as string}`),
